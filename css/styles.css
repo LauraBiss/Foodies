@@ -196,6 +196,11 @@ header nav ul li#logo a:hover {
 	font-size: 16px;
 }
 
+/* Recipe Information */
+#recipeIngredients {
+	visibility: hidden;
+}
+
 /* Footer */
 
 footer.main {

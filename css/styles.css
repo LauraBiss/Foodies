@@ -1,0 +1,242 @@
+/* ===============================
+  
+   Colour Palette:
+   ---------------
+   Light Blue:		#00a2e8
+   Black:			#000000
+   White:			#f2f3ee
+   =============================== */
+
+/* General */
+
+body {
+	background: #f2f3ee url('../images/bg-tile.gif') top left repeat;
+	color: #000000;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizelegibility;
+	font-size: 14px;
+	font-family: 'Open Sans', "Helvetica Neue", Arial, sans-serif;
+}
+
+.container {
+	width: 924px;
+	margin: 0 auto;
+	padding: 30px 24px;
+}
+
+/* Typography */
+
+h1, h2 {
+	font-family: 'Love Ya Like A Sister', cursive;
+	color: #00a2e8;
+	font-size: 40px;
+	font-weight: normal;
+	line-height: 44px;
+	margin: 0;
+}
+
+h1 {
+	text-align: center;
+	background: url('../images/header-divider.png') bottom center no-repeat;
+	padding: 0 0 20px;
+}
+
+h1 em {
+	color: #000000;
+	font-style: normal;
+}
+
+h2 {
+	font-size: 34px;
+}
+
+h3 {
+	margin: 0;
+}
+
+p.lead {
+	font-size: 30px;
+	font-weight: 300;
+	text-align: center;
+	margin: 10px 0;
+}
+
+p {
+	margin: 0;
+}
+
+a:link {
+	color: #00a2e8;
+}
+
+a:visited {
+	color: #00a2e8;
+}
+
+a:hover {
+	color: #000000;
+}
+
+hr {
+	border: none;
+	height: 33px;
+	width: 333px;
+	margin: 30px auto;
+	background: url('../images/divider.png') center center no-repeat;
+}
+
+
+
+/* Header */
+
+header nav {
+	text-align: center;
+}
+
+header nav ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: inline-block;
+	line-height: 141px;
+}
+
+header nav ul li {
+	display: inline-block;
+	padding: 0 20px;
+}
+
+header nav ul li a:hover {
+	color: #000000;
+	padding-top: 20px;
+	background: url('../images/fork.png') top center no-repeat;
+}
+
+header nav ul li a {
+	text-transform: uppercase;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+header nav ul li#logo a {
+	display: block;
+	width: 292px;
+	height: 141px;
+	background: url('../images/logo.png') center center no-repeat;
+	text-indent: -9999px;
+}
+
+header nav ul li#logo a:hover {
+	padding: 0;
+	background: url('../images/logo-hover.png') center center no-repeat;
+}
+
+
+/* Search */
+.button {
+    -moz-box-shadow: inset 0px -2px 0px 0px #006aeb;
+    -webkit-box-shadow: inset 0px -2px 0px 0px #006aeb;
+    box-shadow: inset 0px -2px 0px 0px #006aeb;
+    margin-top: -5px;
+    background-color: #3d94f6;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    vertical-align: middle;
+    border: 1px solid #337fed;
+    color: #FFF;
+    font-family: arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 9px 23px;
+}
+.button:hover {
+    border: 1px solid #1052B4;
+}
+.button:active {
+    position:relative;
+    top:1px;
+}
+.form {
+    width: 290px;
+    border: 1px solid #D6D6D6;
+    background-color: #F9F9F9;
+    font-size: 18px;
+    color: #767676;
+    padding-top: 10px;
+    padding-right: 4px;
+    padding-bottom: 6px;
+    padding-left: 3px;
+    border: 1px solid #d5d5d5;
+    color: #333;
+    border-radius: 4px 4px 4px 4px !important;
+    height: 25px;
+}
+.form.small {
+	display: inline-block;
+}
+
+/* Foodies */
+
+#foodies {
+	background: #00a2e8 url('../images/bg-tile-blue.png') top left repeat;
+}
+
+#foodies img {
+	display: block;
+	width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#story-excerpt {
+	width: 530px;
+	margin-right: 24px;
+	float: left;
+	font-size: 16px;
+}
+
+/* Footer */
+
+footer.main {
+	background: #4b2707 url('../images/bg-tile-black.png') top left repeat;
+	color: #f2f3ee;
+	padding: 30px 0;
+}
+
+footer.main a:hover {
+	color: #f2f3ee;
+}
+
+#uncopyright, #credits {
+	width: 240px;
+	float: left;
+	padding: 10px 0 10px 50px;
+}
+
+#uncopyright {
+	background: url('../images/icon-recycle.png') center left no-repeat;
+}
+
+#credits {
+	background: url('../images/icon-apple.png') center left no-repeat;
+	float: right;
+	margin-top: 5px;
+}
+
+/* Force Elements to Self Clear its Children: http://css-tricks.com/snippets/css/clear-fix/ */
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	content: "";
+	clear: both;
+	height: 0;
+	}
+* html .group             { zoom: 1; } /* IE6 */
+*:first-child+html .group { zoom: 1; } /* IE7 */
+
+
+
+
+

@@ -42,7 +42,7 @@ h1 {
 }
 
 h1 em {
-	color: #000000;
+	color: #00a2e8;
 	font-style: normal;
 }
 
@@ -197,7 +197,7 @@ header nav ul li#logo a:hover {
 }
 
 /* Recipe Information */
-#recipeIngredients {
+#recipeResults {
 	visibility: hidden;
 }
 

@@ -7,15 +7,15 @@
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700,300|Love+Ya+Like+A+Sister' rel='stylesheet' type='text/css'>
 		
 		<!-- Normalize to clean up & standardize the browser default styles: http://necolas.github.io/normalize.css/ -->
-		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="../../css/normalize.css">
 		
 		<!-- Custom CSS -->
 		<link rel="stylesheet" href="../../css/styles.css">
 
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="crossorigin="anonymous"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -33,7 +33,7 @@
 					</nav>
 				</div><!--end col-->
 				<div id="search" class="col align-self-center">
-					<form class="form-small">
+					<form class="form-small" id="recipeForm">
 						<input type="text" id="recipeSearch" aria-describedby="recipeSearch">
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</form>
@@ -43,44 +43,95 @@
 			
 		<div id="foodies">
 			<div class="container">
-			
-				<img src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/recipe-image-legacy-id-777510_11-d5e7200.jpg?quality=90&webp=true&resize=375,341" alt="Foodies Main Page">
-				
+				<div id="recipeResults"></div>
+				<div class="recipeReturn" id="recipeReturn">
+					<img src="https://www.seriouseats.com/thmb/BNQl02dnsjgUPtYaE7brLaF2Qjk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__20101215-ham-tasting-primary-20c51d3a60f242e48621969dbfe9aa84.jpeg" alt="Foodies Main Page">
+				</div><!-- end recipe return -->
 			</div><!-- end container -->
 		</div><!-- end foodies -->
 		
 		<div class="container">
-		
-			<div id="recommendations" class="clearfix">
-				<h1>Tasty <em>Meal</em> Recommendations</h1>
-				<p class="lead"><a href="https://www.bbcgoodfood.com/recipes/steak-chips">Steak and Chips</a></p>
-				<div id="recommendations-excerpt">
-					<p>A fillet steak with a side of crincle cut chips along with sweetcorn, mushrooms (Optional - Diane sauce)</p>
-				</div><!-- end recommendations-excerpt -->
-				
-				<p class="lead"><a href="https://www.bbcgoodfood.com/recipes/chicken-parmo">Chicken Parmo</a></p>
-				<div id="recommendations-excerpt">
-					<p>Chicken breast, covered in breadcrumbs topped with bachamel sauce and thinnly layered cheese slices with a side of chips</p>
-				</div><!-- end recommendations-excerpt -->
-
-			</div><!-- end recommendations -->
+			<div id="recommendations" class="clearfix"></div>
 			<hr>
-			
 		</div><!-- end container -->
 		
 		<footer class="main">
 			<div class="container clearfix">
-			
 				<div id="uncopyright">
 					<p>Uncopyright &copy; 2023 <strong>Ben</strong></p>
 					<p>Please recycle this code responsibly</p>
 				</div><!-- end uncopyright -->
-				
 				<div id="credits">
 					<p>Sustainably coded with love by Ben</a></p>
 				</div><!-- end credits -->
-				
 			</div><!-- end container -->
 		</footer>
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+		<script>
+			$(document).ready(function() {
+				var suggestedRecipes = $("#recommendations").append(document.createElement('div'));
+				suggestedRecipes.empty();
+				suggestedRecipes.append('<h1>Tasty <em>Main Course</em> Recommendations</h1>');
+				const settings = {
+					"async": true,
+					"crossDomain": true,
+					"url": "https://api.edamam.com/api/recipes/v2?type=public&app_id=f28acba3&app_key=be857698f9df5f43189bd9c7faa217f7&tag=main&nbsp;course",
+					"method": "GET",
+					"headers": {
+						'content-type': 'application/json',
+					}
+				};
+
+				$.ajax(settings).done(function (response) {
+					var maxRecipes = 5;
+					var recipeCount = 1;
+					var healthLabelArr = ["Dairy-Free","Gluten-Free","Wheat-Free","Peanut-Free","Vegan","Vegetarian"];
+					$.each(response['hits'], function(i, val){
+						if (recipeCount <= 5) {
+							suggestedRecipes.append('<p class="lead"><a target="_blank" href=' + val.recipe.url + '>' + val.recipe.label + '</a></p>');
+							suggestedRecipes.append('<div id="recommendations-excerpt"><p>');
+							$(val.recipe.healthLabels).each(function(index, value) {
+								if( $.inArray(value, healthLabelArr) > -1) {
+									suggestedRecipes.append("* " + value + "&nbsp;&nbsp;&nbsp;&nbsp;");
+									}
+							});
+							suggestedRecipes.append("</p></div>");
+							recipeCount++;
+						}
+					});
+				});
+			});
+		</script>
+		<script>
+			$(document).ready(function() {
+				$('#recipeForm').submit(function(e) {
+					e.preventDefault();
+					var recipeList = $("#recipeResults").append(document.createElement('div'));
+					recipeList.empty();
+					recipeList.append('<h2>Recipes</h2>');
+					recipeList.append(document.createElement('ul'));
+					var searchterm = $("#recipeSearch").val();
+					const settings = {
+						"async": true,
+						"crossDomain": true,
+						"url": "https://api.edamam.com/api/recipes/v2?type=public&app_id=f28acba3&app_key=be857698f9df5f43189bd9c7faa217f7&tag=" + searchterm,
+						"method": "GET",
+						"headers": {
+							'content-type': 'application/json',
+						}
+					};
+
+					$.ajax(settings).done(function (response) {
+						console.log(response);
+						$("#recipeReturn").css("visibility", "hidden");
+						$("#recipeResults").css("visibility", "visible");
+						$.each(response['hits'], function(i, val){
+							recipeList.append('<li><a style="color: black" target="_blank" href=' + val.recipe.url + '>' + val.recipe.label + '</a></li>');
+						});
+					});
+				});
+			});
+		</script>
 	</body>
 </html>
